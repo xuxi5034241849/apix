@@ -1,5 +1,6 @@
 package org.xuxi.apix.annotations;
 
+
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
@@ -7,12 +8,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
- * API Mapping 描述信息
+ * Api 参数说明
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiOperation {
+public @interface ApiParam {
 
     /**
      * 描述信息
@@ -29,4 +31,5 @@ public @interface ApiOperation {
      */
     @AliasFor("value")
     String describe() default "";
+
 }

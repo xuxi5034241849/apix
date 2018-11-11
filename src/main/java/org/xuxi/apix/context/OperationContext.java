@@ -1,11 +1,13 @@
 package org.xuxi.apix.context;
 
 import com.google.common.base.Optional;
+import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.xuxi.apix.build.OperationBuilder;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 
 public class OperationContext {
 
@@ -38,6 +40,13 @@ public class OperationContext {
 
     public <T extends Annotation> Optional<T> findAnnotation(Class<T> annotation) {
         return requestContext.findAnnotation(annotation);
+    }
+
+    public List<MethodParameter>  getParameterAnnotation(Class<? extends Annotation> annotation) {
+        return requestContext.getParameterAnnotation(annotation);
+    }
+    public List<MethodParameter>  getParameter() {
+        return requestContext.getParameter();
     }
 
 }

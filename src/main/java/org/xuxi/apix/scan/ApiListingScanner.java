@@ -44,8 +44,6 @@ public class ApiListingScanner {
             ApiListingBuilder apiListingBuilder = ApiListingBuilder.getBuild()
                     .apis(sortedApis);
 
-            ApiListing apiListing = apiListingBuilder.build();
-
             apiListingMap.put(resourceGroup.getGroupName(), apiListingBuilder.build());
 
         }

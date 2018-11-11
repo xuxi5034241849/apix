@@ -1,11 +1,13 @@
 package org.xuxi.apix.context;
 
 import com.google.common.base.Optional;
+import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.xuxi.apix.build.ApiDescriptionBuilder;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 import java.util.Set;
 
 public class RequestMappingContext {
@@ -40,6 +42,13 @@ public class RequestMappingContext {
 
     public <T extends Annotation> Optional<T> findAnnotation(Class<T> annotation) {
         return handler.findAnnotation(annotation);
+    }
+
+    public List<MethodParameter>  getParameterAnnotation(Class<? extends Annotation> annotation) {
+        return handler.getParameterAnnotation(annotation);
+    }
+    public List<MethodParameter>  getParameter() {
+        return handler.getParameter();
     }
 
     public ApiDescriptionBuilder apiDescriptionBuilder() {

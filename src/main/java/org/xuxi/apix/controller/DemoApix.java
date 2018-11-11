@@ -1,11 +1,12 @@
 package org.xuxi.apix.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.xuxi.apix.annotations.ApiIgnore;
 import org.xuxi.apix.annotations.ApiOperation;
+import org.xuxi.apix.annotations.ApiParam;
+
+import javax.validation.Valid;
 
 @RestController
 public class DemoApix {
@@ -19,8 +20,10 @@ public class DemoApix {
 
 
     @ApiOperation("我是测试接口")
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, path = "xxxx")
-    public String login(Demo demo) {
+    @RequestMapping(method = {RequestMethod.POST}, path = "xxxx")
+    public String login(@Validated(test.class) @RequestBody Demo demo , @ApiParam("我是s") String ssssss) {
+
+        System.out.println(demo);
 
         return "测试";
     }

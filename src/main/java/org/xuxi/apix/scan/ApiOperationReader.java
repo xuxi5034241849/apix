@@ -45,9 +45,8 @@ public class ApiOperationReader {
                 plugin.apply(operationContext);
             });
 
-
+            operations.add(operationContext.operationBuilder().build());
         }
-
 
         return operations;
     }

@@ -7,12 +7,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * API Mapping 描述信息
- */
-@Target(ElementType.METHOD)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiOperation {
+public @interface ApiModelProperty {
+
 
     /**
      * 描述信息
@@ -29,4 +27,6 @@ public @interface ApiOperation {
      */
     @AliasFor("value")
     String describe() default "";
+
+
 }

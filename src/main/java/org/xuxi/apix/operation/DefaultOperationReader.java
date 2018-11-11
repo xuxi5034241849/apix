@@ -1,12 +1,11 @@
 package org.xuxi.apix.operation;
 
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.xuxi.apix.context.OperationContext;
 
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.DefaultOperationReader)
 public class DefaultOperationReader implements OperationBuilderPlugin {
 
     @Override
