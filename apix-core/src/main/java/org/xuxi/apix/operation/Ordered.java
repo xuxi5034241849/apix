@@ -6,7 +6,9 @@ public interface Ordered {
 
     int OperationSummaryReader = 10;
 
-    int OperationParamsReader = 20;
+    int OperationRequestBodyReader = 20;
+
+    int OperationRequestParamsReader = 20;
 
 
 

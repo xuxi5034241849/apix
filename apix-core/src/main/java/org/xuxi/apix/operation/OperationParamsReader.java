@@ -29,8 +29,8 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
-@Component
-@Order(Ordered.OperationParamsReader)
+//@Component
+//@Order(Ordered.OperationParamsReader)
 public class OperationParamsReader implements OperationBuilderPlugin {
 
     private List<VaildWrapper> vaildWrapper;
@@ -49,49 +49,12 @@ public class OperationParamsReader implements OperationBuilderPlugin {
          * 1、如果方法参数上有 {@link org.springframework.web.bind.annotation.RequestParam} 并且为基本数据类型或String类型
          * 2、如果 Mapping 提交方式为 POST, 方法参数上有 {@link org.springframework.web.bind.annotation.RequestBody}
          */
-
-        // @RequestParam 处理
-        requestParamHandel(context);
-
         // @RequestBody 处理 只处理POST的
         requestBodyHandel(context);
 
 
     }
 
-    /**
-     * {@RequestParam} 处理
-     * <p>
-     * 1、获取mapping 基本类型或 {String}类型
-     *
-     * @param context
-     */
-    private void requestParamHandel(OperationContext context) {
-        List<Map<String, Object>> params = newArrayList();
-
-        context.getParameter().stream().forEach(methodParameter -> {
-
-            methodParameter.initParameterNameDiscovery(new DefaultParameterNameDiscoverer());
-
-            Map<String, Object> map = newHashMap();
-            map.put("field", methodParameter.getParameterName());
-            map.put("type", methodParameter.getParameterType().getName());
-            map.put("describe", methodParameter.getParameterName());
-            map.put("required", Boolean.FALSE);
-
-
-            // 获取方法参数的描述信息
-            getMethodParamDescribe(methodParameter, map);
-
-            // 检查字段是否必填
-            detectionRequired(methodParameter, map);
-
-            // 获取类型
-            params.add(map);
-        });
-
-        context.operationBuilder().setParams(params);
-    }
 
 
     /**
@@ -253,20 +216,6 @@ public class OperationParamsReader implements OperationBuilderPlugin {
     }
 
 
-    /**
-     * 获取方法参数的描述信息
-     *
-     * @param methodParameter
-     * @param map
-     */
-    private void getMethodParamDescribe(MethodParameter methodParameter, Map<String, Object> map) {
-        Annotation apiParamAnnotation = methodParameter.getParameterAnnotation(ApiParam.class);
-        if (apiParamAnnotation != null) {
-            if (!StringUtils.isEmpty(((ApiParam) apiParamAnnotation).describe())) {
-                map.put("describe", ((ApiParam) apiParamAnnotation).describe());
-            }
-        }
-    }
 
     /**
      * 获取字段描述信息
@@ -283,18 +232,7 @@ public class OperationParamsReader implements OperationBuilderPlugin {
         }
     }
 
-    /**
-     * 检查字段是否必填
-     *
-     * @param methodParameter 当前方法参数
-     * @param map             结果集
-     */
-    private void detectionRequired(MethodParameter methodParameter, Map<String, Object> map) {
-        Annotation requestParamAnnotation = methodParameter.getParameterAnnotation(RequestParam.class);
-        if (requestParamAnnotation != null) {
-            map.put("required", ((RequestParam) requestParamAnnotation).required());
-        }
-    }
+
 
 
     /**

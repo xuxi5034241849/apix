@@ -6,7 +6,7 @@ def bootProjects = []
 
 configure(javaProjects) {
 
-    version '1.0.0'
+    version '2.0.0'
     group 'org.xuxi'
 
 
@@ -55,7 +55,7 @@ configure(javaProjects) {
         repositories {
             maven {
                 //指定要上传的maven私服仓库
-                url = "http://10.240.4.27:8081/repository/wonders/"
+                url = ""
                 //认证用户和密码
                 credentials {
                     username 'admin'
@@ -69,10 +69,6 @@ configure(javaProjects) {
 
 }
 
-configure(bootProjects) {
-    apply plugin: 'org.springframework.boot'
-
-}
 
 buildscript {
     ext {

@@ -1,25 +1,19 @@
-package org.xuxi.apix.controller;
-
-import org.xuxi.apix.annotations.ApiModelProperty;
+package org.xuxi.apix.controller.module;
 
 import javax.validation.constraints.NotBlank;
 
-public class Demo {
+public class Person {
 
-    @ApiModelProperty(value = "姓名111111111", groups = test.class)
-    String name;
-
-    @ApiModelProperty("姓名")
-    @NotBlank(groups = test.class)
-    String age;
-
-    @NotBlank(groups = test.class)
-    String sex;
-
+    @NotBlank
     String id;
 
-    Demo1 demo1;
+    String name;
 
+    String age;
+
+    String sex;
+
+    Student student;
 
 
     public String getName() {
@@ -54,12 +48,12 @@ public class Demo {
         this.id = id;
     }
 
-    public Demo1 getDemo1() {
-        return demo1;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setDemo1(Demo1 demo1) {
-        this.demo1 = demo1;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
 }

@@ -1,10 +1,9 @@
-package org.xuxi.apix.controller;
+package org.xuxi.apix;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.xuxi.apix.DocumentationCache;
 import org.xuxi.apix.annotations.Api;
 import org.xuxi.apix.doc.DocDocument;
 
