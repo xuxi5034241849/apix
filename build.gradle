@@ -1,42 +1,78 @@
 group 'org.xuxi'
-version '2.0.0'
+
+def javaProjects = [project(':apix-core'),project(':apix-ui')]
+
+def bootProjects = []
+
+configure(javaProjects) {
+
+    version '1.0.0'
+    group 'org.xuxi'
 
 
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: "maven-publish"
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: "io.spring.dependency-management"
-apply plugin: 'org.springframework.boot'
+    def vJavaLang = '1.8'
 
-def vJavaLang = '1.8'
+    targetCompatibility = vJavaLang
+    sourceCompatibility = vJavaLang
 
-targetCompatibility = vJavaLang
-sourceCompatibility = vJavaLang
-
-repositories {
-    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-}
-
-dependencyManagement {
-    imports {
-        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.SR1'
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
     }
+
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.SR1'
+        }
+    }
+
+    //必加
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
+    }
+
+    //必加，设置对应私服信息
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+
+                //配置上传源码
+                artifact sourceJar {
+                    classifier "sources"
+                }
+
+            }
+        }
+        repositories {
+            maven {
+                //指定要上传的maven私服仓库
+                url = "http://10.240.4.27:8081/repository/wonders/"
+                //认证用户和密码
+                credentials {
+                    username 'admin'
+                    password 'admin123'
+                }
+            }
+        }
+    }
+
+
+
 }
 
-
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-devtools')
-
-
-    compile("com.google.code.gson:gson:2.8.5")
-    compile("com.google.guava:guava:18.0")
+configure(bootProjects) {
+    apply plugin: 'org.springframework.boot'
 
 }
-
-
-
 
 buildscript {
     ext {

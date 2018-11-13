@@ -1,2 +1,4 @@
 rootProject.name = 'apix'
+include 'apix-core'
+include 'apix-ui'
 
