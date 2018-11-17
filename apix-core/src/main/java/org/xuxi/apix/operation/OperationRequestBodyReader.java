@@ -60,7 +60,7 @@ public class OperationRequestBodyReader implements OperationBuilderPlugin {
              *      ApiModelProperty(g1)，NotNull (选填)
              *
              *      NotNull (不显示)
-             *      NotNull(g1) (不显示) todo 这个比较特殊
+             *      NotNull(g1) (不显示)
              *      ApiModelProperty (不显示)
              *      ApiModelProperty(g2) (不显示)
              *
