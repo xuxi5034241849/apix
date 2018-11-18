@@ -6,7 +6,7 @@ def bootProjects = []
 
 configure(javaProjects) {
 
-    version '2.0.0'
+    version '1.1it s.0'
     group 'org.xuxi'
 
 
