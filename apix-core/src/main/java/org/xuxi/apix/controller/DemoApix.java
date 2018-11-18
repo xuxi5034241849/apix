@@ -2,6 +2,7 @@ package org.xuxi.apix.controller;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.xuxi.apix.annotations.Api;
@@ -24,7 +25,7 @@ public class DemoApix {
      */
     @ApiOperation(value = "演示接口1") // 只描述API信息
     @PostMapping("index")
-    private Person index(Person person, @ApiParam @RequestParam(required = false) String name) { // @ApiParam 会检查RequestParams ，会检查RequestParams优先级较高
+    private Person index(@Validated(Person.class) @RequestBody Person person, @ApiParam @RequestParam(required = false) String name) { // @ApiParam 会检查RequestParams ，会检查RequestParams优先级较高
 
 
         return person;

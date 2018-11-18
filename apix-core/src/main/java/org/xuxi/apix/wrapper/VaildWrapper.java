@@ -9,7 +9,12 @@ import java.lang.reflect.Field;
 public interface VaildWrapper {
 
 
-    Class<? extends Annotation> getType();
+    /**
+     * 获取类型
+     *
+     * @return
+     */
+    abstract Class<? extends Annotation> getType();
 
     /**
      * 返回 Vaild group
@@ -17,7 +22,7 @@ public interface VaildWrapper {
      * @param field 返回当前字段的Valid group
      * @return
      */
-    Class<?>[] getGroup(Field field);
+    abstract Class<?>[] getGroup(Field field);
 
 
 }

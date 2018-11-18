@@ -1,5 +1,7 @@
 package org.xuxi.apix.controller.module;
 
+import org.xuxi.apix.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotBlank;
 
 public class Person {
@@ -7,10 +9,13 @@ public class Person {
     @NotBlank
     String id;
 
+    @NotBlank(groups = Person.class)
     String name;
 
+    @ApiModelProperty
     String age;
 
+    @ApiModelProperty(groups = Person.class)
     String sex;
 
     Student student;
